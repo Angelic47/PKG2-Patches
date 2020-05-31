@@ -15,7 +15,7 @@ else {
 What this patch does is change this code to be:
 
 ```cpp
-VerifyRsa2048PssSha256(param_1, 0x100, uVar7, 0x100, modulus + 0x10, 3, (int *)(param_1 + 0x200), 0x200);
+VerifyRsa2048PssSha256(param_1, 0x100, modulus, 0x100, param_3 + 0x10, 3, (int *)(param_1 + 0x200), 0x200);
 /* The signature is good. */
 ```
 
