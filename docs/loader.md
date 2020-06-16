@@ -20,6 +20,22 @@ Result ValidateAcidSignature(Meta *meta) {
 }
 ```
 
+### Atmosphere 0.13.0
+
+What this patch does is change this function to be:
+
+```cpp
+Result ValidateAcidSignature(Meta *meta) {
+    meta->is_signed = false;
+    return ResultSuccess();
+}
+```
+
+In assembly we are changing the instruction `b.hi 0x7100007004` to `nop`, which requires patching 4 bytes: 0x48010054 to 0x1F2003D5. The location of the four bytes will vary between versions of Atmosphère.
+
+
+### Atmosphere < 0.13.0
+
 What this patch does is change this function to be:
 
 ```cpp
@@ -55,5 +71,11 @@ bool IsDevelopmentForAcidProductionCheck() {
     return true;
 }
 ```
+
+### Atmosphere 0.13.0
+
+In assembly we are changing the instruction `ldrb w0,[x0, #0x439]` to `mov w0,#0x1`, which requires patching 4 bytes: 0x00E45039 to 0x20008052. The location of the four bytes will vary between versions of Atmosphère.
+
+### Atmosphere < 0.13.0
 
 In assembly we are changing the instruction `ldrb w0,[x0, #0x178]` to `mov w0,#0x1`, which requires patching 4 bytes: 0x00E44539 to 0x20008052. The location of the four bytes varies between versions of Atmosphère.
